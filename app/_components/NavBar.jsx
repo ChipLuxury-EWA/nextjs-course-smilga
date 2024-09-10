@@ -13,7 +13,7 @@ const NavBar = () => {
 
   return (
     <nav className="bg-base-300 py-4">
-      <div className="navbar px-8 max-w-6xl mx-auto flex-col sm:flex-row">
+      <div className="navbar px-8 max-w-8xl mx-auto flex-col sm:flex-row">
         <Link className="btn btn-primary" href={"/"}>
           Home
         </Link>

@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <NavBar />
-        <main className="px-8 py-20 max-w-6xl mx-auto">{children}</main>
+        <main className="p-8 max-w-8xl mx-auto">{children}</main>
       </body>
     </html>
   );
