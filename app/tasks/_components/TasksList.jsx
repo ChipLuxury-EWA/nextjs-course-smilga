@@ -1,12 +1,8 @@
-import prisma from "@/utils/db";
 import TaskItem from "./TaskItem";
-
+import { getAllTasks } from "@/utils/task.actions";
 const TasksList = async () => {
-  const allTasks = await prisma.task.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  const allTasks = await getAllTasks();
+
 
   const dynamicTasksList = allTasks.map((task) => {
     return <TaskItem key={task.id} task={task} />;
