@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const NavBar = () => {
-  const tabsList = ["About", "Client", "Drinks", "Prisma-example", "Query", "Tasks"];
+  const tabsList = ["About", "Client", "Drinks", "Query", "Tasks"];
 
   const tabs = tabsList.map((tab) => {
     return (
