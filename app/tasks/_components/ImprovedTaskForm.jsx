@@ -1,6 +1,8 @@
 "use client";
 import { improvedCreateTask } from "@/utils/task.actions";
+import { useEffect } from "react";
 import { useFormStatus, useFormState } from "react-dom";
+import toast from "react-hot-toast";
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();
@@ -18,6 +20,14 @@ const initialFormState = {
 const ImprovedTaskForm = () => {
   const [formState, setFormState] = useFormState(improvedCreateTask, initialFormState);
 
+  useEffect(() => {
+    if (formState.success && formState.message) {
+      toast.success(formState.message);
+    } else if (!formState.success && formState.message) {
+      toast.error(formState.message);
+    }
+  }, [formState]);
+
   return (
     <form action={setFormState}>
       <div className="join join-horizontal w-full">
@@ -30,14 +40,6 @@ const ImprovedTaskForm = () => {
         />
         <SubmitButton />
       </div>
-
-      {formState.message && (
-        <div className="toast">
-          <div role="alert" className={`alert alert-${formState.success ? "success" : "error"}`}>
-            <span>{formState.message}</span>
-          </div>
-        </div>
-      )}
     </form>
   );
 };
