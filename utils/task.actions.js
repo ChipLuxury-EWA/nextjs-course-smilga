@@ -9,6 +9,13 @@ export const createTask = async (formData) => {
   revalidatePath("/tasks");
 };
 
+export const improvedCreateTask = async (formData) => {
+  await new Promise((r) => setTimeout(r, 2000)); // simulate slow network to portray loading state
+  const content = formData.get("content");
+  await prisma.task.create({ data: { content } });
+  revalidatePath("/tasks");
+};
+
 export const updateTask = async (formData) => {
   const id = formData.get("id");
   const content = formData.get("content");
