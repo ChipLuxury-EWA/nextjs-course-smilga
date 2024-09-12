@@ -1,6 +1,6 @@
 "use client";
 import { improvedCreateTask } from "@/utils/task.actions";
-import { useFormStatus } from "react-dom";
+import { useFormStatus, useFormState } from "react-dom";
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();
@@ -11,9 +11,15 @@ const SubmitButton = () => {
   );
 };
 
+const initialFormState = {
+  message: null,
+};
+
 const ImprovedTaskForm = () => {
+  const [formState, setFormState] = useFormState(improvedCreateTask, initialFormState);
+
   return (
-    <form action={improvedCreateTask}>
+    <form action={setFormState}>
       <div className="join join-horizontal w-full">
         <input
           className="input input-bordered join-item w-full"
@@ -24,6 +30,14 @@ const ImprovedTaskForm = () => {
         />
         <SubmitButton />
       </div>
+
+      {formState.message && (
+        <div className="toast">
+          <div role="alert" className={`alert alert-${formState.success ? "success" : "error"}`}>
+            <span>{formState.message}</span>
+          </div>
+        </div>
+      )}
     </form>
   );
 };

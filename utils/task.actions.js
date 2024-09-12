@@ -9,11 +9,16 @@ export const createTask = async (formData) => {
   revalidatePath("/tasks");
 };
 
-export const improvedCreateTask = async (formData) => {
+export const improvedCreateTask = async (prevState, formData) => {
   await new Promise((r) => setTimeout(r, 2000)); // simulate slow network to portray loading state
   const content = formData.get("content");
-  await prisma.task.create({ data: { content } });
-  revalidatePath("/tasks");
+  try {
+    await prisma.task.create({ data: { content } });
+    revalidatePath("/tasks");
+    return {message: "Great success", success: true}
+  } catch (error) {
+    return {message: "Error adding new task", success: false}
+  }
 };
 
 export const updateTask = async (formData) => {
