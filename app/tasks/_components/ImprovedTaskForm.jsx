@@ -13,7 +13,7 @@ const SubmitButton = () => {
   );
 };
 
-const initialFormState = {
+export const initialFormState = {
   message: null,
 };
 
