@@ -11,7 +11,7 @@ export const createTask = async (formData) => {
 };
 
 export const improvedCreateTask = async (prevState, formData) => {
-  // await new Promise((r) => setTimeout(r, 2000)); // simulate slow network to portray loading state
+  await new Promise((r) => setTimeout(r, 600)); // simulate slow network to portray loading state
   const content = formData.get("content");
   const Task = z.object({ content: z.string().min(5) });
   try {
@@ -21,7 +21,7 @@ export const improvedCreateTask = async (prevState, formData) => {
     return { message: "Great success!", success: true };
   } catch (error) {
     console.log(error);
-    const message = error.errors && error.issues[0].message || error.message;
+    const message = (error.errors && error.issues[0].message) || error.message;
     return { message, success: false };
   }
 };
@@ -34,10 +34,17 @@ export const updateTask = async (formData) => {
   redirect("/tasks");
 };
 
-export const deleteTask = async (formData) => {
-  const id = formData.get("id");
-  await prisma.task.delete({ where: { id } });
-  revalidatePath("/tasks");
+export const deleteTask = async (prevState, formData) => {
+    await new Promise((r) => setTimeout(r, 600)); // simulate slow network to portray loading state
+  try {
+    const id = formData.get("id");
+    await prisma.task.delete({ where: { id } });
+    revalidatePath("/tasks");
+    return { message: "Deleted!", success: true };
+  } catch (error) {
+    console.log(error);
+    return { message: error.message, success: false };
+  }
 };
 
 export const getSingleTask = async (id) => {

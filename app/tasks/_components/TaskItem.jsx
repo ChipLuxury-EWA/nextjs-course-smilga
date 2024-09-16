@@ -1,5 +1,5 @@
 import Link from "next/link";
-import DeleteTask from "./DeleteTask";
+import DeleteTaskForm from "./DeleteTask";
 
 const TaskItem = ({ task }) => {
   return (
@@ -9,7 +9,7 @@ const TaskItem = ({ task }) => {
         <Link className="btn btn-accent btn-xs" href={`/tasks/${task.id}`}>
           Edit
         </Link>
-        <DeleteTask id={task.id} />
+        <DeleteTaskForm id={task.id} />
       </div>
     </li>
   );
