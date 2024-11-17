@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export const middleware = (request) => {
-    console.log("first")
+    // console.log("first")
 //   return NextResponse.redirect(new URL("/", request.url));
 };
 
